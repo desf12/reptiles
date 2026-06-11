@@ -13,7 +13,7 @@
             --bg-color: #f5f7fa;
             --text-color: #333;
         }
-
+ 
         body {
             font-family: "Microsoft JhengHei", "PingFang HK", sans-serif;
             background-color: var(--bg-color);
@@ -21,7 +21,7 @@
             margin: 0;
             padding: 15px;
         }
-
+ 
         .nav-tabs {
             max-width: 1200px;
             margin: 0 auto 20px auto;
@@ -29,7 +29,7 @@
             justify-content: center;
             gap: 10px;
         }
-
+ 
         .tab-btn {
             flex: 1;
             max-width: 200px;
@@ -43,7 +43,7 @@
             cursor: pointer;
             text-align: center;
         }
-
+ 
         .tab-btn.active {
             color: white;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
@@ -51,7 +51,7 @@
         
         #btn-form.active { background-color: var(--primary-color); }
         #btn-history.active { background-color: var(--history-color); }
-
+ 
         .section-container {
             display: none;
             max-width: 1200px;
@@ -61,13 +61,13 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-
+ 
         .section-container.active { display: block; }
-
+ 
         h2, h3 { text-align: center; color: var(--text-color); margin-top: 0; }
         
         .history-title { color: var(--history-color); margin-bottom: 20px; font-size: 1.4em; }
-
+ 
         .header-info {
             display: flex;
             flex-wrap: wrap;
@@ -79,7 +79,7 @@
             border-radius: 8px;
             border: 1px solid #e1e8ed;
         }
-
+ 
         .input-group {
             display: flex;
             align-items: center;
@@ -87,7 +87,7 @@
             flex: 1;
             min-width: 250px;
         }
-
+ 
         .input-group input {
             flex: 1;
             border: 1px solid var(--border-color);
@@ -95,7 +95,7 @@
             padding: 8px 10px;
             font-size: 1em;
         }
-
+ 
         table { width: 100%; border-collapse: collapse; margin-bottom: 15px; background: #fff; }
         th, td { text-align: left; padding: 15px; border: 1px solid var(--border-color); vertical-align: top; }
         th { background-color: #f8f9fa; font-weight: bold; color: #555; text-align: center; }
@@ -108,15 +108,15 @@
         .checkbox-label input[type="checkbox"] { margin-right: 10px; width: 22px; height: 22px; accent-color: var(--primary-color); }
         .na-text { color: #aaa; font-style: italic; text-align: center; }
         .animal-name { font-weight: bold; font-size: 1.1em; text-align: center; background-color: #f0f4f8; }
-
+ 
         .actions { margin-top: 30px; display: flex; justify-content: center; gap: 15px; }
         button { padding: 12px 25px; font-size: 1.1em; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
         .btn-save { background-color: var(--success-color); color: white; width: 100%; max-width: 300px; }
         .btn-reset { background-color: #e0e0e0; color: #333; }
-
+ 
         .table-history th { background-color: var(--history-color); color: white; }
         .record-details { line-height: 1.6; white-space: pre-line; color: #444; }
-
+ 
         .filter-container {
             display: flex;
             justify-content: flex-start; 
@@ -137,7 +137,7 @@
             color: white;
             border-color: var(--history-color);
         }
-
+ 
         @media (max-width: 768px) {
             table, thead, tbody, th, td, tr { display: block; width: 100%; box-sizing: border-box; }
             thead { display: none; }
@@ -149,108 +149,108 @@
             .table-history tr { border-color: var(--history-color); }
             .table-history td::before { color: var(--history-color); }
             .table-history td.animal-name { background-color: var(--history-color); }
-
+ 
             .na-text::before { display: none; }
             .na-text { text-align: left; color: #ccc; }
         }
-
+ 
         #loading { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 999; justify-content: center; align-items: center; font-size: 1.2em; font-weight: bold; color: var(--primary-color); }
     </style>
 </head>
 <body>
-
+ 
 <div id="loading">🔮 正在安全連線雲端中...</div>
-
+ 
 <div class="nav-tabs">
     <button class="tab-btn active" id="btn-form" onclick="switchTab('form')">✏️ 填寫護理表</button>
     <button class="tab-btn" id="btn-history" onclick="switchTab('history')">📋 歷史紀錄</button>
 </div>
-
+ 
 <div id="formSection" class="section-container active">
     <h2>🐾 日常護理填寫</h2>
     <div class="header-info">
         <div class="input-group"><label><strong>負責學生：</strong></label><input type="text" id="studentName" placeholder="請輸入姓名"></div>
         <div class="input-group"><label><strong>日期：</strong></label><input type="date" id="recordDate"></div>
     </div>
-
+ 
     <table id="careTable">
         <thead>
             <tr><th>動/植物</th><th>餵食</th><th>保濕 / 飲水</th><th>排便與脫皮</th><th>確認鎖缸</th><th>磅重</th></tr>
         </thead>
         <tbody>
             <tr>
-                <td class="animal-name">🦗 蟋蟀</td>
-                <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食飼料" class="feed-cb"> 飼料</label><input type="number" class="qty-input" placeholder="數量"></div></td>
-                <td class="na-text">不適用</td>
-                <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label></td>
-                <td class="na-text">不適用</td>
-                <td class="na-text">不適用</td>
+                 <td class="animal-name">🦗 蟋蟀</td>
+                 <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食飼料" class="feed-cb"> 飼料</label><input type="number" class="qty-input" placeholder="數量"></div></td>
+                 <td class="na-text">不適用</td>
+                 <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label></td>
+                 <td class="na-text">不適用</td>
+                 <td class="na-text">不適用</td>
             </tr>
             <tr>
-                <td class="animal-name">🦎 高冠變色龍</td>
-                <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食蟋蟀" class="feed-cb"> 蟋蟀</label><input type="number" class="qty-input" placeholder="數量"></div></td>
-                <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="噴水"> 噴水</label></td>
-                <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label><label class="checkbox-label"><input type="checkbox" value="脫皮保濕"> 脫皮保濕</label></td>
-                <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
-                <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
+                 <td class="animal-name">🦎 高冠變色龍</td>
+                 <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食蟋蟀" class="feed-cb"> 蟋蟀</label><input type="number" class="qty-input" placeholder="數量"></div></td>
+                 <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="噴水"> 噴水</label></td>
+                 <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label><label class="checkbox-label"><input type="checkbox" value="脫皮保濕"> 脫皮保濕</label></td>
+                 <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
+                 <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
             </tr>
             <tr>
                 <td class="animal-name">🐍 球蟒</td>
-                <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食乳鼠" class="feed-cb"> 乳鼠(每2週)</label><input type="number" class="qty-input" placeholder="數量"></div></td>
-                <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="噴水"> 噴水</label><label class="checkbox-label"><input type="checkbox" value="更換飲用水"> 更換飲用水</label></td>
-                <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label><label class="checkbox-label"><input type="checkbox" value="脫皮保濕"> 脫皮保濕</label></td>
-                <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
-                <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
+                 <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食乳鼠" class="feed-cb"> 乳鼠(每2週)</label><input type="number" class="qty-input" placeholder="數量"></div></td>
+                 <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="噴水"> 噴水</label><label class="checkbox-label"><input type="checkbox" value="更換飲用水"> 更換飲用水</label></td>
+                 <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label><label class="checkbox-label"><input type="checkbox" value="脫皮保濕"> 脫皮保濕</label></td>
+                 <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
+                 <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
             </tr>
             <tr>
-                <td class="animal-name">🦎 貢山龍蜥</td>
-                <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食蟋蟀" class="feed-cb"> 蟋蟀</label><input type="number" class="qty-input" placeholder="數量"></div></td>
-                <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="噴水"> 噴水</label><label class="checkbox-label"><input type="checkbox" value="更換飲用水"> 更換飲用水</label></td>
-                <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label></td>
-                <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
-                <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
+                 <td class="animal-name">🦎 貢山龍蜥</td>
+                 <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食蟋蟀" class="feed-cb"> 蟋蟀</label><input type="number" class="qty-input" placeholder="數量"></div></td>
+                 <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="噴水"> 噴水</label><label class="checkbox-label"><input type="checkbox" value="更換飲用水"> 更換飲用水</label></td>
+                 <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label></td>
+                 <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
+                 <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
             </tr>
             <tr>
-                <td class="animal-name">🐢 眼斑水龜</td>
-                <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食龜糧" class="feed-cb"> 龜糧飼料</label><input type="number" class="qty-input" placeholder="數量"></div></td>
-                <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="加水至指定刻度"> 加水至櫃底刻度</label></td>
-                <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label></td>
-                <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
-                <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
+                 <td class="animal-name">🐢 眼斑水龜</td>
+                 <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食龜糧" class="feed-cb"> 龜糧飼料</label><input type="number" class="qty-input" placeholder="數量"></div></td>
+                 <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="加水至指定刻度"> 加水至櫃底刻度</label></td>
+                 <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label></td>
+                 <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
+                 <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
             </tr>
             <tr>
-                <td class="animal-name">🐉 鬆獅蜥</td>
-                <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食蟋蟀" class="feed-cb"> 蟋蟀</label><input type="number" class="qty-input" placeholder="數量"></div><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食新鮮蔬菜" class="feed-cb"> 新鮮蔬菜</label><input type="number" class="qty-input" placeholder="數量"></div></td>
-                <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="浸泡 15-30 分鐘"> 浸泡15-30分(每週2次)</label></td>
-                <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label><label class="checkbox-label"><input type="checkbox" value="脫皮保濕"> 脫皮保濕</label></td>
-                <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
-                <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
+                 <td class="animal-name">🐉 鬆獅蜥</td>
+                 <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食蟋蟀" class="feed-cb"> 蟋蟀</label><input type="number" class="qty-input" placeholder="數量"></div><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食新鮮蔬菜" class="feed-cb">新鮮蔬菜</label><input type="number" class="qty-input" placeholder="數量"></div></td>
+                 <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="浸泡 15-30 分鐘"> 浸泡15-30分(每週2次)</label></td>
+                 <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label><label class="checkbox-label"><input type="checkbox" value="脫皮保濕"> 脫皮保濕</label></td>
+                 <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
+                 <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
             </tr>
             <tr>
-                <td class="animal-name">🐢 紅腿象龜</td>
-                <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食新鮮蔬菜" class="feed-cb"> 新鮮蔬菜</label><input type="number" class="qty-input" placeholder="數量"></div><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食水果" class="feed-cb"> 水果</label><input type="number" class="qty-input" placeholder="數量"></div></td>
-                <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="浸泡 15-30 分鐘"> 浸泡15-30分(每週2次)</label><label class="checkbox-label"><input type="checkbox" value="確保大水盆有水"> 大水盆要有水</label></td>
-                <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label></td>
-                <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
-                <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
+                 <td class="animal-name">🐢 紅腿象龜</td>
+                 <td data-label="📌 餵食"><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食新鮮蔬菜" class="feed-cb">新鮮蔬菜</label><input type="number" class="qty-input" placeholder="數量"></div><div class="feed-item"><label class="checkbox-label"><input type="checkbox" value="餵食水果" class="feed-cb"> 水果</label><input type="number" class="qty-input" placeholder="數量"></div></td>
+                 <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="浸泡 15-30 分鐘"> 浸泡15-30分(每週2次)</label><label class="checkbox-label"><input type="checkbox" value="確保大水盆有水"> 大水盆要有水</label></td>
+                 <td data-label="💩 排泄"><label class="checkbox-label"><input type="checkbox" value="清理排泄物"> 清理排泄物</label></td>
+                 <td data-label="🔒 鎖缸"><label class="checkbox-label"><input type="checkbox" value="確認鎖缸"> 確認鎖缸</label></td>
+                 <td data-label="⚖️ 磅重"><div class="weight-item"><label class="checkbox-label"><input type="checkbox" value="每 2 星期磅重" class="weight-cb"> 磅重</label><input type="number" step="0.1" class="weight-input" placeholder="克"> g</div></td>
             </tr>
             <tr>
-                <td class="animal-name">🌱 環境植物</td>
-                <td class="na-text">不適用</td>
-                <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="全株噴水保濕"> 全株噴水保濕(每日)</label></td>
-                <td class="na-text">不適用</td>
-                <td class="na-text">不適用</td>
-                <td class="na-text">不適用</td>
+                 <td class="animal-name">🌱 環境植物</td>
+                 <td class="na-text">不適用</td>
+                 <td data-label="💧 保濕"><label class="checkbox-label"><input type="checkbox" value="全株噴水保濕"> 全株噴水保濕(每日)</label></td>
+                 <td class="na-text">不適用</td>
+                 <td class="na-text">不適用</td>
+                 <td class="na-text">不適用</td>
             </tr>
         </tbody>
     </table>
-
+ 
     <div class="actions">
         <button class="btn-reset" onclick="resetForm(true)">清除重填</button>
         <button class="btn-save" onclick="uploadToCloud()">🚀 直接上傳雲端紀錄</button>
     </div>
 </div>
-
+ 
 <div id="historySection" class="section-container">
     <h3 class="history-title">📋 護理歷史紀錄</h3>
     <table class="history-table table-history">
@@ -261,32 +261,48 @@
             <tr><td colspan="3" style="text-align:center; color:#999; padding:20px;">正在加載雲端資料...</td></tr>
         </tbody>
     </table>
-    
+     
     <div class="filter-container">
         <button class="filter-btn active" id="f-all" onclick="applyFilter('all')">顯示全部</button>
         <button class="filter-btn" id="f-today" onclick="applyFilter('today')">今天紀錄</button>
         <button class="filter-btn" id="f-past" onclick="applyFilter('past')">過往紀錄</button>
     </div>
 </div>
-
+ 
 <script>
+    // 🌟 已更新：精準對接您提供的 Google Form 表單設定
     const GOOGLE_FORM_ID = "1FAIpQLSfGXYThXbA3CCfCTqNQgLby6YttAtiYqS-SIURAt7617v-Q1g"; 
-    const SPREADSHEET_ID = "1igi8oFPaC4PTduqaep-RB9jpAFP4G8umdg6Tstdrmfk"; 
-    
+    const SPREADSHEET_ID = "1igi8oFPaC4PTduqaep-RB9jpAFP4G8umdg6Tstdrmfk";
+     
     const ENTRY_DATE = "entry.217054490"; 
     const ENTRY_NAME = "entry.1786999062"; 
     const ENTRY_TEXT = "entry.724765074"; 
-
+ 
     let cachedRecords = { all: '', today: '', past: '' };
-
+ 
     document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('recordDate').value = new Date().toISOString().split('T')[0];
-    });
 
+        // 🛠️ 防呆優化：當學生輸入數據時，系統自動幫忙勾選對應的 Checkbox
+        document.querySelectorAll('.qty-input').forEach(input => {
+            input.addEventListener('input', (e) => {
+                const cb = e.target.closest('.feed-item').querySelector('.feed-cb');
+                if (cb && e.target.value.trim() !== '') cb.checked = true;
+            });
+        });
+
+        document.querySelectorAll('.weight-input').forEach(input => {
+            input.addEventListener('input', (e) => {
+                const cb = e.target.closest('.weight-item').querySelector('.weight-cb');
+                if (cb && e.target.value.trim() !== '') cb.checked = true;
+            });
+        });
+    });
+ 
     function switchTab(tabId) {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.section-container').forEach(sec => sec.classList.remove('active'));
-
+ 
         if (tabId === 'form') {
             document.getElementById('btn-form').classList.add('active');
             document.getElementById('formSection').classList.add('active');
@@ -296,43 +312,43 @@
             loadHistory();
         }
     }
-
+ 
     function uploadToCloud() {
         const name = document.getElementById('studentName').value.trim();
         const date = document.getElementById('recordDate').value;
         if (!name) { alert('請輸入負責學生姓名！'); return; }
-
+ 
         let completed = [];
         document.querySelectorAll('#careTable tbody tr').forEach(row => {
             const animal = row.querySelector('.animal-name').innerText.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim();
             const checked = row.querySelectorAll('input[type="checkbox"]:checked');
             if (checked.length > 0) {
-                let details = Array.from(checked).map(cb => {
-                    let text = cb.value;
-                    if (cb.classList.contains('feed-cb')) {
+                 let details = Array.from(checked).map(cb => {
+                     let text = cb.value;
+                     if (cb.classList.contains('feed-cb')) {
                         const qty = cb.closest('.feed-item').querySelector('.qty-input').value;
-                        if (qty) text += ` (數量: ${qty})`;
-                    }
-                    if (cb.classList.contains('weight-cb')) {
-                        const weight = cb.closest('.weight-item').querySelector('.weight-input').value;
-                        if (weight) text += ` (重量: ${weight}g)`;
-                    }
-                    return text;
-                });
-                completed.push(`【${animal}】\n${details.join('、')}`);
+                         if (qty) text += ` (數量: ${qty})`;
+                     }
+                     if (cb.classList.contains('weight-cb')) {
+                         const weight = cb.closest('.weight-item').querySelector('.weight-input').value;
+                         if (weight) text += ` (重量: ${weight}g)`;
+                     }
+                     return text;
+                 });
+                 completed.push(`【${animal}】\n${details.join('、')}`);
             }
         });
-
+ 
         if (completed.length === 0) { alert('請至少勾選一項護理項目！'); return; }
-
+ 
         const fullText = completed.join('\n\n');
         document.getElementById('loading').style.display = 'flex';
-
+ 
         const formData = new URLSearchParams();
         formData.append(ENTRY_DATE, date);
         formData.append(ENTRY_NAME, name);
         formData.append(ENTRY_TEXT, fullText);
-
+ 
         fetch(`https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`, {
             method: 'POST',
             body: formData,
@@ -347,110 +363,101 @@
             alert('連線失敗，請檢查網路或設定！');
         });
     }
-
-    // 🛠️ 核心精準分流演算法
+ 
     function loadHistory() {
         const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json`;
         
         fetch(url).then(res => res.text()).then(text => {
             try {
-                const json = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
-                const rows = json.table.rows;
-                
-                let allHtml = '', todayHtml = '', pastHtml = '';
-                
-                // 1. 抓取手機當前的真實本地「年、月、日」數字
-                const today = new Date();
-                const todayYY = today.getFullYear();
-                const todayMM = today.getMonth(); // 0-11
-                const todayDD = today.getDate();
-
-                if (rows && rows.length > 1) {
-                    for (let i = rows.length - 1; i >= 1; i--) {
-                        const r = rows[i].c;
-                        if(!r) continue;
-                        
-                        const cellDate = r[1]; 
-                        const dateStr = cellDate ? (cellDate.f || cellDate.v || "") : "";
-                        const name = r[2] ? (r[2].v || "") : "";
-                        const detail = r[3] ? (r[3].v || "") : "";
-                        
-                        if (name || detail) {
-                            const rowHtml = `<tr>
-                                <td data-label="護理日期">${dateStr}</td>
-                                <td data-label="負責學生"><strong>${name}</strong></td>
-                                <td data-label="完成項目" class="record-details">${detail}</td>
-                            </tr>`;
-                            
-                            allHtml += rowHtml;
-                            
-                            let isToday = false;
-                            
-                            if (cellDate) {
-                                const vStr = String(cellDate.v);
-                                let rowYY = null, rowMM = null, rowDD = null;
-
-                                // 模式 A：如果是 Google 原生 Date 格式物件例如 "Date(2026,5,11)"
-                                if (vStr.startsWith('Date(')) {
-                                    const matches = vStr.match(/\d+/g);
-                                    if (matches && matches.length >= 3) {
-                                        rowYY = parseInt(matches[0]);
-                                        rowMM = parseInt(matches[1]); // Google底層月份也是 0-11，免調整
-                                        rowDD = parseInt(matches[2]);
-                                    }
-                                } else {
-                                    // 模式 B：解構純文字日期字串 (適應 11/6/2026、11/06/2026 或 2026-06-11 等)
-                                    const parts = dateStr.split(/[-\/]/).map(p => parseInt(p));
-                                    if (parts.length === 3) {
-                                        if (parts[0] > 1900) { 
-                                            // 格式為 YYYY-MM-DD
-                                            rowYY = parts[0]; 
-                                            rowMM = parts[1] - 1; 
-                                            rowDD = parts[2];
-                                        } else {
-                                            // 格式為 日/月/年 (如 11/6/2026)
-                                            rowYY = parts[2]; 
-                                            rowMM = parts[1] - 1; 
-                                            rowDD = parts[0];
-                                        }
-                                    }
-                                }
-
-                                // 精準進行「年、月、日」數值比對，徹底排除一切時區、時間干擾
-                                if (rowYY === todayYY && rowMM === todayMM && rowDD === todayDD) {
-                                    isToday = true;
-                                }
-                            }
-
-                            if (isToday) {
-                                todayHtml += rowHtml;
-                            } else {
-                                pastHtml += rowHtml;
-                            }
-                        }
-                    }
-                }
-                
-                cachedRecords.all = allHtml || `<tr><td colspan="3" style="text-align:center;color:#999;padding:20px;">目前尚無任何紀錄</td></tr>`;
-                cachedRecords.today = todayHtml || `<tr><td colspan="3" style="text-align:center;color:#999;padding:20px;">今天尚無填寫任何紀錄</td></tr>`;
-                cachedRecords.past = pastHtml || `<tr><td colspan="3" style="text-align:center;color:#999;padding:20px;">尚無過往紀錄</td></tr>`;
-                
-                const currentActive = document.querySelector('.filter-btn.active');
-                if (currentActive) {
-                    const currentType = currentActive.id.replace('f-', '');
-                    applyFilter(currentType);
-                } else {
-                    applyFilter('all');
-                }
-                
+                 const json = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
+                 const rows = json.table.rows;
+                 
+                 let allHtml = '', todayHtml = '', pastHtml = '';
+                 const today = new Date();
+                 const todayYY = today.getFullYear();
+                 const todayMM = today.getMonth(); 
+                 const todayDD = today.getDate();
+ 
+                 if (rows && rows.length > 1) {
+                     for (let i = rows.length - 1; i >= 1; i--) {
+                         const r = rows[i].c;
+                         if(!r) continue;
+                         
+                         const cellDate = r[1]; 
+                         const dateStr = cellDate ? (cellDate.f || cellDate.v || "") : "";
+                         const name = r[2] ? (r[2].v || "") : "";
+                         const detail = r[3] ? (r[3].v || "") : "";
+                         
+                         if (name || detail) {
+                             const rowHtml = `<tr>
+                                 <td data-label="護理日期">${dateStr}</td>
+                                 <td data-label="負責學生"><strong>${name}</strong></td>
+                                 <td data-label="完成項目" class="record-details">${detail}</td>
+                             </tr>`;
+                             
+                             allHtml += rowHtml;
+                             let isToday = false;
+                             
+                             if (cellDate) {
+                                 const vStr = String(cellDate.v);
+                                 let rowYY = null, rowMM = null, rowDD = null;
+ 
+                                 if (vStr.startsWith('Date(')) {
+                                     const matches = vStr.match(/\d+/g);
+                                     if (matches && matches.length >= 3) {
+                                         rowYY = parseInt(matches[0]);
+                                         rowMM = parseInt(matches[1]); 
+                                         rowDD = parseInt(matches[2]);
+                                     }
+                                 } else {
+                                     const parts = dateStr.split(/[-\/]/).map(p => parseInt(p));
+                                     if (parts.length === 3) {
+                                         if (parts[0] > 1900) { 
+                                             rowYY = parts[0]; 
+                                             rowMM = parts[1] - 1; 
+                                             rowDD = parts[2];
+                                         } else {
+                                             rowYY = parts[2]; 
+                                             rowMM = parts[1] - 1; 
+                                             rowDD = parts[0];
+                                         }
+                                     }
+                                 }
+ 
+                                 if (rowYY === todayYY && rowMM === todayMM && rowDD === todayDD) {
+                                     isToday = true;
+                                 }
+                             }
+ 
+                             if (isToday) {
+                                 todayHtml += rowHtml;
+                             } else {
+                                 pastHtml += rowHtml;
+                             }
+                         }
+                     }
+                 }
+                 
+                 cachedRecords.all = allHtml || `<tr><td colspan="3" style="text-align:center;color:#999;padding:20px;">目前尚無任何紀錄</td></tr>`;
+                 cachedRecords.today = todayHtml || `<tr><td colspan="3" style="text-align:center;color:#999;padding:20px;">今天尚無填寫任何紀錄</td></tr>`;
+                 cachedRecords.past = pastHtml || `<tr><td colspan="3" style="text-align:center;color:#999;padding:20px;">尚無過往紀錄</td></tr>`;
+                 
+                 const currentActive = document.querySelector('.filter-btn.active');
+                 if (currentActive) {
+                     const currentType = currentActive.id.replace('f-', '');
+                     applyFilter(currentType);
+                 } else {
+                     applyFilter('all');
+                 }
+                 
             } catch(e) {
-                document.getElementById('historyList').innerHTML = `<tr><td colspan="3" style="text-align:center;color:red;padding:20px;">讀取失敗：請確定試算表已開啟共用權限</td></tr>`;
+                 document.getElementById('historyList').innerHTML = `<tr><td colspan="3" style="text-align:center;color:red;padding:20px;">讀取失敗：請確定試算表已開啟共用權限</td></tr>`;
             }
         }).catch(err => {
             document.getElementById('historyList').innerHTML = `<tr><td colspan="3" style="text-align:center;color:red;padding:20px;">網路連線錯誤，無法載入雲端資料</td></tr>`;
         });
     }
-
+ 
     function applyFilter(type) {
         document.getElementById('historyList').innerHTML = cachedRecords[type];
         
@@ -460,7 +467,7 @@
         
         document.getElementById('f-' + type).classList.add('active');
     }
-
+ 
     function resetForm(confirmAction) {
         if (!confirmAction || confirm('確定要清空表格嗎？')) {
             document.getElementById('studentName').value = '';
